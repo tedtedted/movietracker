@@ -12,7 +12,7 @@ public class WatchedMovie {
     @JsonProperty("watched_at")
     private Instant watchedAt;
 
-    private Movie movie;
+    private final Movie movie;
 
     public Long getId() {
         return id;
