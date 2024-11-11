@@ -1,14 +1,10 @@
 package com.tedredington.movietracker;
 
-import com.tedredington.movietracker.trakt.WatchedMovie;
+import com.tedredington.movietracker.trakt.TraktMovieService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.web.client.RestClient;
-
-import java.util.List;
 
 @SpringBootApplication
 public class Application {
@@ -18,15 +14,10 @@ public class Application {
     }
 
     @Bean
-    ApplicationRunner applicationRunner(RestClient traktMovieRestClient){
+    ApplicationRunner applicationRunner(TraktMovieService traktMovieService) {
         return args -> {
-            List<WatchedMovie> response = traktMovieRestClient.get()
-                    .retrieve()
-                    .body(new ParameterizedTypeReference<List<WatchedMovie>>() {
-                    });
-            System.out.println(response);
+            traktMovieService.getWatchedMovies();
         };
     }
-
 }
 
