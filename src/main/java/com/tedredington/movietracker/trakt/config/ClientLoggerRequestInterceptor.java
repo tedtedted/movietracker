@@ -1,4 +1,4 @@
-package com.tedredington.movietracker.trakt;
+package com.tedredington.movietracker.trakt.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
