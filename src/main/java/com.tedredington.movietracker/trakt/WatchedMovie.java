@@ -14,6 +14,12 @@ public class WatchedMovie {
 
     private final Movie movie;
 
+    public WatchedMovie(Long id, Instant watchedAt, Movie movie) {
+        this.id = id;
+        this.watchedAt = watchedAt;
+        this.movie = movie;
+    }
+
     public Long getId() {
         return id;
     }
@@ -26,12 +32,6 @@ public class WatchedMovie {
         return watchedAt;
     }
 
-    public WatchedMovie(Long id, Instant watchedAt, Movie movie) {
-        this.id = id;
-        this.watchedAt = watchedAt;
-        this.movie = movie;
-    }
-
     @Override
     public String toString() {
         return "WatchedMovie{" +
@@ -39,18 +39,5 @@ public class WatchedMovie {
                 ", watchedAt=" + watchedAt +
                 ", movie=" + movie +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WatchedMovie that = (WatchedMovie) o;
-        return Objects.equals(id, that.id) && Objects.equals(watchedAt, that.watchedAt) && Objects.equals(movie, that.movie);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, watchedAt, movie);
     }
 }

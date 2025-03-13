@@ -37,7 +37,7 @@ class TraktClientConfig {
     @Bean
     public RestClient traktMoviesRestClient(Optional<Instant> startAt, Optional<Instant> endAt, ClientLoggerRequestInterceptor clientLoggerRequestInterceptor) {
         return RestClient.builder()
-                .baseUrl(TRAKT_BASE_URL + TRAKT_USERNAME + "/history/movies")
+                .baseUrl(TRAKT_BASE_URL + TRAKT_USERNAME)
                 .defaultHeaders(
                         httpHeaders -> {
                             httpHeaders.set("content-type", MediaType.APPLICATION_JSON_VALUE);

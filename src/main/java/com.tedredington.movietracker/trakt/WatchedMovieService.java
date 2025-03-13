@@ -14,17 +14,21 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TraktMovieService {
+public class WatchedMovieService {
 
     private final RestClient traktMovieRestClient;
-    private final Logger logger = LoggerFactory.getLogger(TraktMovieService.class);
+    private final Logger logger = LoggerFactory.getLogger(WatchedMovieService.class);
 
-    public TraktMovieService(RestClient traktMovieRestClient) {
+    public WatchedMovieService(RestClient traktMovieRestClient) {
         this.traktMovieRestClient = traktMovieRestClient;
     }
 
     public List<WatchedMovie> getWatchedMovies() {
         List<WatchedMovie> response = traktMovieRestClient.get()
+                .uri(uriBuilder -> {
+                    uriBuilder.path("/history/movies");
+                    return uriBuilder.build();
+                })
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<WatchedMovie>>() {
                 });

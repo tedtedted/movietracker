@@ -8,20 +8,17 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 @Component
 public class WatchedMoviesRunner implements ApplicationRunner {
 
-    private final TraktMovieService traktService;
+    private final WatchedMovieService traktService;
     private final LetterboxdCsvWriter letterboxdCsvWriter;
 
     private final static Logger log = LoggerFactory.getLogger(WatchedMoviesRunner.class);
 
-    public WatchedMoviesRunner(TraktMovieService traktService, LetterboxdCsvWriter letterboxdCsvWriter) {
+    public WatchedMoviesRunner(WatchedMovieService traktService, LetterboxdCsvWriter letterboxdCsvWriter) {
         this.traktService = traktService;
         this.letterboxdCsvWriter = letterboxdCsvWriter;
     }
