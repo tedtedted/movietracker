@@ -60,37 +60,4 @@ public class LetterboxdCsvWriter {
         // Escape single quotes by adding a backslash in front
         return title.replace("'", "\\'");
     }
-
-    public void writeWatchlistMoviesToCsv(List<WatchlistMovie> watchlistMovies) {
-        String timestamp = String.valueOf(System.currentTimeMillis());
-        String date = DATE_FORMATTER.format(Instant.now());
-        String filePath = "data/watchlist_movies_" + date + "_" + timestamp + ".csv";
-
-        // Ensure the /data directory exists
-        File dataDirectory = new File("data");
-        if (!dataDirectory.exists()) {
-            dataDirectory.mkdir();
-        }
-
-
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
-                CSVWriter.DEFAULT_SEPARATOR,
-                CSVWriter.DEFAULT_QUOTE_CHARACTER,
-                CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-                CSVWriter.DEFAULT_LINE_END)) {
-
-            writer.writeNext(new String[]{"Title", "Year", "tmdbID", "imdbID"});
-            for (WatchlistMovie movie : watchlistMovies) {
-                writer.writeNext(new String[]{
-                        escapeField(movie.getMovie().title()),
-                        String.valueOf(movie.getMovie().year()),
-                        String.valueOf(movie.getMovie().ids().tmdbId()),
-                        String.valueOf(movie.getMovie().ids().imdbId()),
-                });
-            }
-            logger.info("File written: {}", filePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
