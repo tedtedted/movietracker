@@ -15,3 +15,6 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+ # In case CSVs are left in here while pushing an update. don't include
+data/
