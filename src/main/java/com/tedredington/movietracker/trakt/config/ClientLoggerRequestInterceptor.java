@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Component
 public class ClientLoggerRequestInterceptor implements ClientHttpRequestInterceptor {
@@ -48,7 +49,17 @@ public class ClientLoggerRequestInterceptor implements ClientHttpRequestIntercep
     }
 
     private void logHeaders(HttpHeaders headers) {
-        log.info("Request Headers {}: ",String.valueOf(headers));
+
+        // obfuscate API Key in logs. Maybe a littel clunky? Recommended by ChatGPT over Logback handling
+        HttpHeaders sanitizedHeaders = new HttpHeaders();
+        headers.forEach((key, value) -> {
+            if (key.equalsIgnoreCase("trakt-api-key")) {
+                sanitizedHeaders.put(key, List.of("****************************************************************"));
+            } else {
+                sanitizedHeaders.put(key, value);
+            }
+        });
+        log.info("Request Headers {}: ",String.valueOf(sanitizedHeaders));
     }
 
     private static class BufferingClientHttpResponseWrapper implements ClientHttpResponse {
